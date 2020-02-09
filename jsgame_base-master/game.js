@@ -33,13 +33,19 @@ let motionStep = 4;
 // other variables
 let spawn, motion, playerGravity;
 
+let musicGame;
+musicGame = new Audio("alien.mp3");
+
+
+
 /****************************************************
  *** When game starts ***
  ****************************************************/
 
+
 // enemy motion
 
-let gameOver = document.querySelector(".but");
+let gameOver = document.querySelector(".button");
 
 document.addEventListener("click", function() {
   start();
@@ -54,8 +60,12 @@ function suppr(elt)
     elt.parentNode.removeChild(elt);
 }
 
+musicGame.play();
+musicGame.loop = true;
+
 function start()
 {
+  musicGame.play();
   spawnEnemy();
   suppr(enemies);
   setInterval(motion);
@@ -63,7 +73,7 @@ function start()
   player.style.display = "block";
   enemies.style.display = "block";
   gover.style.display = "none";
-  intervalID = window.setInterval(spawnEnemy, 2500);
+  intervalID = window.setInterval(spawnEnemy, 1700);
   player.style.bottom = marginBottom + "px";
 };
 
@@ -80,7 +90,8 @@ document.addEventListener('keydown', event => {
   }
 });
 
-intervalID = window.setInterval(spawnEnemy, 2500);
+intervalID = window.setInterval(spawnEnemy, 1700);
+
 
 
 
@@ -163,6 +174,7 @@ function spawnEnemy() {
   enemies.appendChild(newObstacle);
 }
 
+
 // move an enemy
 // this function is called for each enemy step
 // see the setInterval above
@@ -196,5 +208,7 @@ function stopAll() {
 
   // stop to spawn new enemies
   clearInterval(spawn);
+  musicGame.pause();
 
 }
+
